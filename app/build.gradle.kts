@@ -50,6 +50,7 @@ dependencies {
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.core.ktx)
     implementation(libs.material)
+    implementation(libs.play.services.location)
     implementation(libs.retrofit.gson)
     implementation(libs.retrofit.core)
     implementation(libs.androidx.fragment.ktx)

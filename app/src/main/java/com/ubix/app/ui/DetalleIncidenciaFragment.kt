@@ -1,60 +1,181 @@
 package com.ubix.app.ui
 
+import android.net.Uri
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.ubix.app.MainActivity
 import com.ubix.app.R
+import com.ubix.app.data.IncidenciaStore
+import com.ubix.app.databinding.FragmentDetalleIncidenciaBinding
+import com.ubix.app.model.Incidencia
+import com.ubix.app.remote.ApiCliente
+import com.ubix.app.util.InsetsUtil
+import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [DetalleIncidenciaFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class DetalleIncidenciaFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var _binding: FragmentDetalleIncidenciaBinding? = null
+    private val binding get() = _binding!!
+
+    private lateinit var incidenciaStore: IncidenciaStore
+
+    private var incidenciaActual: Incidencia? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
+        incidenciaStore = IncidenciaStore(requireContext().applicationContext)
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_detalle_incidencia, container, false)
+        _binding = FragmentDetalleIncidenciaBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        InsetsUtil.aplicar(binding.tvHeaderDetalle, arriba = true, abajo = false)
+        InsetsUtil.aplicar(binding.contenidoDetalle, arriba = false, abajo = true)
+
+        mostrarIncidencia(obtenerIncidencia())
+        configurarBotones()
+    }
+
+    private fun configurarBotones() {
+        binding.btnEnProceso.setOnClickListener {
+            cambiarEstado(getString(R.string.estado_en_proceso))
+        }
+        binding.btnSolucionada.setOnClickListener {
+            cambiarEstado(getString(R.string.estado_solucionada))
+        }
+        binding.btnEditar.setOnClickListener {
+            val actual = incidenciaActual ?: return@setOnClickListener
+            (requireActivity() as MainActivity).editarDesdeDetalle(actual.id)
+        }
+        binding.btnEliminar.setOnClickListener {
+            confirmarEliminacion()
+        }
+        binding.btnVolver.setOnClickListener {
+            (requireActivity() as MainActivity).volver()
+        }
+    }
+
+    private fun obtenerIncidencia(): Incidencia {
+        val id = arguments?.getLong(ARG_ID, 0L) ?: 0L
+        val encontrada = if (id != 0L) incidenciaStore.obtenerPorId(id) else null
+        return encontrada ?: Incidencia(
+            uuid = getString(R.string.sin_dato),
+            categoria = getString(R.string.sin_dato),
+            zona = getString(R.string.sin_dato),
+            descripcion = getString(R.string.sin_dato),
+            prioridad = getString(R.string.prioridad_baja),
+            estado = getString(R.string.estado_reportada)
+        )
+    }
+
+    private fun mostrarIncidencia(incidencia: Incidencia) {
+        incidenciaActual = incidencia
+        binding.tvCodigoValor.text = getString(R.string.detalle_uuid_formato, incidencia.uuid)
+        binding.tvCategoriaValor.text = incidencia.categoria
+        binding.tvZonaValor.text = incidencia.zona
+        binding.tvDescripcionValor.text = incidencia.descripcion
+        binding.tvPrioridadValor.text = incidencia.prioridad
+        binding.tvEstadoValor.text = incidencia.estado
+        binding.tvEstadoValor.setTextColor(requireContext().getColor(colorDelEstado(incidencia.estado)))
+
+        if (incidencia.latitud != null && incidencia.longitud != null) {
+            binding.tvUbicacionValor.text = getString(
+                R.string.gps_formato,
+                incidencia.latitud,
+                incidencia.longitud
+            )
+        } else {
+            binding.tvUbicacionValor.text = getString(R.string.gps_pendiente)
+        }
+
+        val archivo = incidencia.fotoPath?.let(::File)?.takeIf { it.exists() }
+        if (archivo == null) {
+            binding.imageDetalle.visibility = View.GONE
+        } else {
+            binding.imageDetalle.visibility = View.VISIBLE
+            binding.imageDetalle.setImageURI(Uri.fromFile(archivo))
+        }
+
+        if (incidencia.sincronizada) {
+            binding.tvSyncValor.text = getString(R.string.sync_si)
+        } else {
+            binding.tvSyncValor.text = getString(R.string.sync_no)
+        }
+    }
+
+    private fun colorDelEstado(estado: String): Int {
+        return when (estado) {
+            getString(R.string.estado_solucionada) -> R.color.status_solucionada
+            getString(R.string.estado_en_proceso) -> R.color.status_en_proceso
+            else -> R.color.status_reportada
+        }
+    }
+
+    private fun cambiarEstado(nuevoEstado: String) {
+        val actual = incidenciaActual ?: return
+        val estabaSincronizada = actual.sincronizada
+        val actualizada = actual.copy(estado = nuevoEstado, sincronizada = false)
+
+        incidenciaStore.actualizar(actualizada)
+        mostrarIncidencia(actualizada)
+
+        if (estabaSincronizada) {
+            ApiCliente.actualizarEstado(actual.uuid, nuevoEstado) { exito, _ ->
+                if (exito) {
+                    incidenciaStore.marcarSincronizada(actual.id)
+                    if (_binding != null) {
+                        mostrarIncidencia(actualizada.copy(sincronizada = true))
+                    }
+                }
+            }
+        }
+        Toast.makeText(
+            requireContext(),
+            getString(R.string.msg_estado_formato, nuevoEstado),
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun confirmarEliminacion() {
+        val actual = incidenciaActual ?: return
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.titulo_eliminar)
+            .setMessage(R.string.msg_eliminar)
+            .setPositiveButton(R.string.btn_si) { _, _ ->
+                actual.fotoPath?.let(::File)?.delete()
+                incidenciaStore.eliminar(actual.id)
+                Toast.makeText(requireContext(), R.string.msg_eliminado, Toast.LENGTH_SHORT).show()
+                (requireActivity() as MainActivity).volver()
+            }
+            .setNegativeButton(R.string.btn_no, null)
+            .show()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment DetalleIncidenciaFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            DetalleIncidenciaFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+        private const val ARG_ID = "arg_id"
+
+        fun nueva(id: Long): DetalleIncidenciaFragment {
+            return DetalleIncidenciaFragment().apply {
+                arguments = Bundle().apply { putLong(ARG_ID, id) }
             }
+        }
     }
 }
