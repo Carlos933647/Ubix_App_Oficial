@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Se pinta de blanco y el adapter lo tiñe según el estado. -->
+    <solid android:color="@color/urbix_white" />
+    <corners android:radius="@dimen/corner_radius_chip" />
+</shape>

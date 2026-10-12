@@ -1,5 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="urbix_primary">#0D47A1</color>
+    <color name="urbix_primary_dark">#002171</color>
+    <color name="urbix_accent">#1976D2</color>
+    <color name="urbix_bg_screen">#F4F6F9</color>
+    <color name="urbix_surface">#FFFFFF</color>
+    <color name="urbix_border">#DDE2E5</color>
+    <color name="urbix_text_primary">#1C252C</color>
+    <color name="urbix_text_secondary">#607274</color>
+    <color name="urbix_white">#FFFFFF</color>
+    <color name="urbix_header_subtitle">#CCFFFFFF</color>
+    <color name="urbix_icon_bg">#EAF1FB</color>
+    <color name="urbix_chip_selected">#DCE8FA</color>
+    <color name="status_reportada">#C62828</color>
+    <color name="status_en_proceso">#EF6C00</color>
+    <color name="status_solucionada">#2E7D32</color>
+    <color name="status_chip_bg">#FFF3E0</color>
+    <color name="prio_alta">#E53935</color>
+    <color name="prio_media">#FB8C00</color>
+    <color name="prio_baja">#43A047</color>
 </resources>

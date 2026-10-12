@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="@dimen/spacing_medium"
+    android:layout_marginVertical="6dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?attr/selectableItemBackground"
+    app:cardBackgroundColor="@color/urbix_surface"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="2dp"
+    app:strokeWidth="0dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:id="@+id/viewPrioridad"
+            android:layout_width="6dp"
+            android:layout_height="match_parent"
+            android:background="@color/prio_baja" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="@dimen/spacing_medium">
+
+            <TextView
+                android:id="@+id/tvItemIcono"
+                android:layout_width="44dp"
+                android:layout_height="44dp"
+                android:background="@drawable/bg_icono_categoria"
+                android:gravity="center"
+                android:text="📍"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvItemCategoria"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:text="Pistas y Calzadas"
+                android:textColor="@color/urbix_text_primary"
+                android:textSize="@dimen/text_subtitle"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvItemIcono"
+                app:layout_constraintTop_toTopOf="@+id/tvItemIcono" />
+
+            <TextView
+                android:id="@+id/tvItemZona"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="@dimen/spacing_small"
+                android:layout_marginTop="2dp"
+                android:text="Sector 2 - Santa Anita · Prioridad Media"
+                android:textColor="@color/urbix_text_secondary"
+                android:textSize="@dimen/text_caption"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/tvItemIcono"
+                app:layout_constraintTop_toBottomOf="@+id/tvItemCategoria" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barreraCabecera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tvItemIcono,tvItemZona" />
+
+            <TextView
+                android:id="@+id/tvItemDescripcion"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:ellipsize="end"
+                android:maxLines="2"
+                android:text="Bache pronunciado de 2 metros que interrumpe el tránsito vehicular."
+                android:textColor="@color/urbix_text_primary"
+                android:textSize="@dimen/text_body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/barreraCabecera" />
+
+            <ImageView
+                android:id="@+id/imageMini"
+                android:layout_width="0dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="12dp"
+                android:contentDescription="@string/foto_incidencia"
+                android:scaleType="centerCrop"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvItemDescripcion" />
+
+            <TextView
+                android:id="@+id/tvItemEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_estado_chip"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:text="@string/estado_reportada"
+                android:textColor="@color/status_reportada"
+                android:textSize="@dimen/text_caption"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageMini" />
+
+            <TextView
+                android:id="@+id/tvItemSync"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/item_sync_pend"
+                android:textColor="@color/status_en_proceso"
+                android:textSize="@dimen/text_caption"
+                app:layout_constraintBottom_toBottomOf="@+id/tvItemEstado"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvItemEstado" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

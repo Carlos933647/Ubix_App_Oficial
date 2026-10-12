@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/urbix_bg_screen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvHeaderRegistro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/urbix_primary"
+        android:padding="@dimen/spacing_medium"
+        android:text="@string/title_registro"
+        android:textColor="@color/urbix_white"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenidoRegistro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/urbix_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        style="@style/Urbix.SectionTitle"
+                        android:text="@string/seccion_datos" />
+
+                    <TextView
+                        android:id="@+id/lblCategoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_categoria"
+                        android:textColor="@color/urbix_text_primary"
+                        android:textSize="@dimen/text_body"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spnCategoria"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginTop="@dimen/spacing_micro"
+                        android:background="@drawable/bg_surface_panel" />
+
+                    <TextView
+                        android:id="@+id/lblZona"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:text="@string/label_zona"
+                        android:textColor="@color/urbix_text_primary"
+                        android:textSize="@dimen/text_body"
+                        android:textStyle="bold" />
+
+                    <Spinner
+                        android:id="@+id/spnZona"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/button_height"
+                        android:layout_marginTop="@dimen/spacing_micro"
+                        android:background="@drawable/bg_surface_panel" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilDescripcion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_medium"
+                        android:hint="@string/hint_descripcion">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtDescripcion"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top"
+                            android:inputType="textMultiLine|textCapSentences"
+                            android:lines="3"
+                            android:textSize="@dimen/text_body" />
+                    </com.google.android.material.textfield.TextInputLayout>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                app:cardBackgroundColor="@color/urbix_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        style="@style/Urbix.SectionTitle"
+                        android:text="@string/seccion_evidencia" />
+
+                    <ImageView
+                        android:id="@+id/imageFoto"
+                        android:layout_width="match_parent"
+                        android:layout_height="160dp"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:background="@drawable/bg_surface_panel"
+                        android:contentDescription="@string/foto_incidencia"
+                        android:scaleType="centerInside" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnFoto"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/button_height"
+                            android:layout_marginEnd="@dimen/spacing_micro"
+                            android:layout_weight="1"
+                            android:text="@string/btn_foto"
+                            android:textColor="@color/urbix_primary"
+                            app:cornerRadius="@dimen/corner_radius_input" />
+
+                        <com.google.android.material.button.MaterialButton
+                            android:id="@+id/btnGps"
+                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                            android:layout_width="0dp"
+                            android:layout_height="@dimen/button_height"
+                            android:layout_marginStart="@dimen/spacing_micro"
+                            android:layout_weight="1"
+                            android:text="@string/btn_gps"
+                            android:textColor="@color/urbix_primary"
+                            app:cornerRadius="@dimen/corner_radius_input" />
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tvGpsInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/spacing_small"
+                        android:text="@string/gps_pendiente"
+                        android:textColor="@color/urbix_text_secondary"
+                        android:textSize="@dimen/text_caption" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnGuardarBorrador"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_large"
+                android:backgroundTint="@color/urbix_primary"
+                android:text="@string/btn_guardar_borrador"
+                android:textColor="@color/urbix_white"
+                android:textSize="@dimen/text_subtitle"
+                app:cornerRadius="@dimen/corner_radius_input" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

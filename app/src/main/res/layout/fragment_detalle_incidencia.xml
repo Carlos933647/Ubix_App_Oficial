@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/urbix_bg_screen"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/tvHeaderDetalle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/urbix_primary"
+        android:padding="@dimen/spacing_medium"
+        android:text="@string/detalle_titulo"
+        android:textColor="@color/urbix_white"
+        android:textSize="@dimen/text_title"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:clipToPadding="false"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/contenidoDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/spacing_medium">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardDetalle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardBackgroundColor="@color/urbix_surface"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="2dp"
+                app:strokeWidth="0dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:padding="@dimen/spacing_medium">
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_uuid" />
+
+                    <TextView
+                        android:id="@+id/tvCodigoValor"
+                        style="@style/Urbix.Value" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_categoria_detalle" />
+
+                    <TextView
+                        android:id="@+id/tvCategoriaValor"
+                        style="@style/Urbix.Value"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_zona_detalle" />
+
+                    <TextView
+                        android:id="@+id/tvZonaValor"
+                        style="@style/Urbix.Value" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_descripcion_detalle" />
+
+                    <TextView
+                        android:id="@+id/tvDescripcionValor"
+                        style="@style/Urbix.Value" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_prioridad" />
+
+                    <TextView
+                        android:id="@+id/tvPrioridadValor"
+                        style="@style/Urbix.Value" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_estado" />
+
+                    <TextView
+                        android:id="@+id/tvEstadoValor"
+                        style="@style/Urbix.Value"
+                        android:textColor="@color/urbix_primary"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_ubicacion" />
+
+                    <TextView
+                        android:id="@+id/tvUbicacionValor"
+                        style="@style/Urbix.Value" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_foto" />
+
+                    <ImageView
+                        android:id="@+id/imageDetalle"
+                        android:layout_width="match_parent"
+                        android:layout_height="180dp"
+                        android:layout_marginBottom="@dimen/spacing_small"
+                        android:contentDescription="@string/foto_incidencia"
+                        android:scaleType="centerCrop"
+                        android:visibility="gone" />
+
+                    <TextView
+                        style="@style/Urbix.Label"
+                        android:text="@string/label_sync" />
+
+                    <TextView
+                        android:id="@+id/tvSyncValor"
+                        style="@style/Urbix.Value"
+                        android:layout_marginBottom="@dimen/spacing_none" />
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:id="@+id/layoutEstadoActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEnProceso"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginEnd="@dimen/spacing_micro"
+                    android:layout_weight="1"
+                    android:text="@string/btn_en_proceso"
+                    android:textColor="@color/status_en_proceso"
+                    app:cornerRadius="@dimen/corner_radius_input"
+                    app:strokeColor="@color/status_en_proceso" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnSolucionada"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginStart="@dimen/spacing_micro"
+                    android:layout_weight="1"
+                    android:text="@string/btn_solucionada"
+                    android:textColor="@color/status_solucionada"
+                    app:cornerRadius="@dimen/corner_radius_input"
+                    app:strokeColor="@color/status_solucionada" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/layoutEditActions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/spacing_small"
+                android:orientation="horizontal">
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEditar"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginEnd="@dimen/spacing_micro"
+                    android:layout_weight="1"
+                    android:text="@string/btn_editar"
+                    android:textColor="@color/urbix_primary"
+                    app:cornerRadius="@dimen/corner_radius_input" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnEliminar"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/button_height"
+                    android:layout_marginStart="@dimen/spacing_micro"
+                    android:layout_weight="1"
+                    android:text="@string/btn_eliminar"
+                    android:textColor="@color/status_reportada"
+                    app:cornerRadius="@dimen/corner_radius_input"
+                    app:strokeColor="@color/status_reportada" />
+            </LinearLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnVolver"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/button_height"
+                android:layout_marginTop="@dimen/spacing_medium"
+                android:backgroundTint="@color/urbix_primary"
+                android:text="@string/btn_volver"
+                android:textColor="@color/urbix_white"
+                app:cornerRadius="@dimen/corner_radius_input" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

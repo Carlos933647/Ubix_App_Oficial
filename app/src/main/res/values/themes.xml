@@ -1,9 +1,49 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Ubix_App_Oficial" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+    <style name="Base.Theme.URBIX" parent="Theme.Material3.Light.NoActionBar">
+        <item name="colorPrimary">@color/urbix_primary</item>
+        <item name="colorOnPrimary">@color/urbix_white</item>
+        <item name="colorSecondary">@color/urbix_accent</item>
+        <item name="colorOnSecondary">@color/urbix_white</item>
+        <item name="colorSecondaryContainer">@color/urbix_chip_selected</item>
+        <item name="colorOnSecondaryContainer">@color/urbix_primary_dark</item>
+        <item name="colorSurface">@color/urbix_surface</item>
+        <item name="colorSurfaceContainer">@color/urbix_bg_screen</item>
+        <item name="colorSurfaceContainerHigh">@color/urbix_surface</item>
+        <item name="colorOutline">@color/urbix_border</item>
+        <item name="android:statusBarColor">@color/urbix_primary_dark</item>
+        <item name="android:navigationBarColor">@color/urbix_white</item>
+        <item name="android:fontFamily">sans</item>
     </style>
 
-    <style name="Theme.Ubix_App_Oficial" parent="Base.Theme.Ubix_App_Oficial" />
+    <style name="Theme.URBIX" parent="Base.Theme.URBIX" />
+
+    <style name="Urbix.ShapeRounded" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">12dp</item>
+    </style>
+
+    <style name="Urbix.Label" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/urbix_text_secondary</item>
+        <item name="android:textSize">@dimen/text_caption</item>
+    </style>
+
+    <style name="Urbix.Value" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_small</item>
+        <item name="android:textColor">@color/urbix_text_primary</item>
+        <item name="android:textSize">@dimen/text_body</item>
+    </style>
+
+    <style name="Urbix.SectionTitle" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/spacing_medium</item>
+        <item name="android:textColor">@color/urbix_primary</item>
+        <item name="android:textSize">@dimen/text_subtitle</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

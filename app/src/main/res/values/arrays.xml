@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categorias">
+        <item>@string/categoria_pistas</item>
+        <item>@string/categoria_veredas</item>
+        <item>@string/categoria_alumbrado</item>
+        <item>@string/categoria_senalizacion</item>
+        <item>@string/categoria_mobiliario</item>
+    </string-array>
+    <string-array name="zonas">
+        <item>@string/zona_cercado</item>
+        <item>@string/zona_santa_anita</item>
+        <item>@string/zona_sjl</item>
+        <item>@string/zona_ves</item>
+        <item>@string/zona_olivos</item>
+    </string-array>
+</resources>
